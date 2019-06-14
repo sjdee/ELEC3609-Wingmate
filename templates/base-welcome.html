@@ -1,0 +1,61 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'myapp/css/base.css' %}">
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'myapp/css/welcome.css' %}">
+	<link rel="shortcut icon" href="{% static 'myapp/images/favicon.ico' %}" type="image/x-icon">
+	<link rel="icon" href="{% static 'myapp/images/favicon.ico' %}" type="image/x-icon">
+
+	<!-- Additional head markup -->
+	{% block head %}
+	{% endblock %}
+
+	<!-- Custom stylesheets -->
+	{% block style %}
+	{% endblock %}
+
+</head>
+<body>
+
+	<nav id="top_bar">
+		<ul>
+
+			{% block navigation %}
+			{% endblock %}
+
+			<li id="list_elem"><a href="/about" class="tab__item"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a></li>
+
+			<!-- <li id="logo"><a href="/" class="tab__item">WingMate</a></li> -->
+
+		</ul>
+	</nav>
+
+
+
+	<div class="page">
+
+		{% block content %}
+		{% endblock %}
+
+	</div>
+
+
+	<footer>
+		<div>
+			<p>ELEC3609 2017</p>
+		</div>
+
+	</footer>
+
+
+</body>
+</html>

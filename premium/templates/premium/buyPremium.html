@@ -1,0 +1,45 @@
+{% extends 'base-home.html' %}
+{% load static %}
+{% block content %}
+<html>
+    <head>
+        <title>
+			Gems
+        </title>
+    </head>
+	<link rel="stylesheet" type="text/css" href="{% static 'premium/css/buyPremium.css' %}">
+    <body>
+		        <div class="row db-padding-btm db-attached" id = "premiumBox">
+		            <div class="col-xs-12 col-sm-4 col-md-10 col-lg-10 col-xs-offset-0 col-lg-offset-1 col-sm-offset-4" id = "test">
+		                <div class="db-wrapper">
+		                    <div class="db-pricing-eleven db-bk-color-one">
+		                        <div class="price">
+		                            <sup>$</sup>1
+		                        </div>
+		                        <div class="type">
+		                            GO PREMIUM
+		                        </div>
+		                        <ul>
+
+		                            <li><i class="glyphicon glyphicon-king"></i>Meet All The Kings & Queens</li>
+
+		                        </ul>
+		                        <div class="pricing-footer">
+
+		                            <!-- <a href="#" class="btn db-button-color-square btn-lg">PayPal</a> -->
+                                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                    <input type="hidden" name="cmd" value="_s-xclick">
+                                    <input type="hidden" name="hosted_button_id" value="4CTF7DMXXUMGN">
+                                    <input type="hidden" name="success" value="success">
+                                    <input type="image" src="http://i350.photobucket.com/albums/q421/chrisisthebest/22834350_2020717224814174_1532711167_n_zps0yse8lch.png" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+                                    <img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
+                                    </form>
+
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+
+		            </body>
+</html>
+{% endblock %}

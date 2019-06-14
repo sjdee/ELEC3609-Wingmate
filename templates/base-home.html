@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="{% static 'myapp/css/base.css' %}">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://use.fontawesome.com/088f45210a.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
+	<link rel="shortcut icon" href="{% static 'myapp/images/favicon.ico' %}" type="image/x-icon">
+	<link rel="icon" href="{% static 'myapp/images/favicon.ico' %}" type="image/x-icon">
+
+	<!-- Additional head markup -->
+	{% block head %}
+	{% endblock %}
+
+	<!-- Custom stylesheets -->
+	{% block style %}
+	{% endblock %}
+
+
+
+</head>
+<body>
+
+	<nav>
+		<ul>
+
+			<li class="drop">
+				<a href="#" class="tab__item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Account</a>
+				<div class="dropdownContain">
+					<div class="dropOut">
+						<div class="triangle"></div>
+						<ul>
+							<li><a href="/profile">Profile</a></li>
+							<li><a href="/premium">Go Premium</a></li>
+							<li><a href="/logout-redirect">Logout</a></li>
+						</ul>
+					</div>
+				</div>
+			</li>
+			<li><a href="/about" class="tab__item"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a></li>
+
+			<!-- <li class="drop grad">
+				<a href="#" class="tab__item"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Chatbox</a>
+				<div class="dropdownContain">
+					<div class="dropOut">
+						<div class="triangle"></div>
+						<ul>
+							<li><a href="#">Contacts</a></li>
+							<li><a href="/chatbox">Recent</a></li>
+						</ul>
+					</div>
+				</div>
+			</li> -->
+
+			<li><a href="/chatbox" class="tab__item"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Chatbox</a></li>
+
+			<li><a href="/wingmap" class="tab__item"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Wingmap</a></li>
+
+			<li><a href="/" class="tab__item"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a></li>
+
+			<!-- <li id="logo"><a href="/" class="tab__item"><img src="{% static 'myapp/images/logo.png' %}"></a></li> -->
+
+			<li id="logo"><a href="/" class="tab__item">WingMate</a></li>
+
+		</ul>
+	</nav>
+
+
+	<div class="page">
+
+		{% block content %}
+		{% endblock %}
+
+	</div>
+
+	<footer>
+		<div>
+			<p>ELEC3609 2017</p>
+		</div>
+
+	</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+	<meta charset="UTF-8">
+
+	<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
+	<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+
+	<script src="{% static 'slick/slick.js' %}" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'slick/slick.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'slick/slick-theme.css' %}">
+
+	<script type="text/javascript">
+	    $(document).on('ready', function() {
+			$(".wingmate").slick({
+        dots: true,
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 4000,
+        arrows: false,
+        speed: 1200,
+        fade: true,
+      });
+		});
+  	</script>
+
+	<title>Signup</title>
+</head>
+<body style="background-image: url({% static 'images/bg-eagle.jpg' %})">
+
+    <div class="content">
+
+        <div id="container-one" class="container">
+
+            <h2 id="carousel-title">WingMate</h2>
+
+            <!-- <div class="carousel">
+
+                <section class="wingmate slider" data-sizes="50vw">
+                    <div>
+                        <img src="http://placehold.it/320x320?text=1">
+                    </div>
+                    <div>
+                        <img src="http://placehold.it/320x320?text=2">
+                    </div>
+                    <div>
+                        <img src="http://placehold.it/320x320?text=3">
+                    </div>
+
+                </section>
+            </div> -->
+            
+        </div>
+
+        <div id="container-two" class="container">
+
+            <div class="tabs-toggle">
+                <div class="tab-item" id="signup-tab" onclick="show_signup();">Sign Up</div><div class="tab-item" id="login-tab" onclick="show_login();">Login</div>
+            </div>
+
+            <div class="signup-container">
+            
+                <form method="POST" action="{% url 'signup' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <h1 class="title signup-title">Create an Account</h1>
+                    </div>
+
+                    <h1 class="subtitle">Wingmate lets you meet new people.</h1>
+
+                    <div class="form-group">
+                        <div>{{ signup_form.first_name }}</div>
+                        <!-- <div><input type="text" name="first-name" class="form-input" placeholder="first name"></div> -->
+                        <div>{{ signup_form.last_name }}</div>
+                        <!-- <div><input type="text" name="last-name" class="form-input" placeholder="last name" style="float: right;"></div> -->
+                    </div>
+                    <div class="form-group {% if signup_form.email.errors %}errors{% endif %}">
+                        {{ signup_form.email }}
+                        <!-- <input type="email" name="email" class="form-input" placeholder="your email address"> -->
+                    </div>
+                    <div class="form-group {% if signup_form.username.errors %}errors{% endif %}">
+                        {{ signup_form.username }}
+                        <!-- <input type="text" name="username" class="form-input" placeholder="your username"> -->
+                    </div>
+                    <div class="form-group {% if signup_form.password1.errors %}errors{% endif %}">
+                        {{ signup_form.password1 }}
+                        <!-- <input type="password" name="pwd" class="form-input" placeholder="choose a password"> -->
+                    </div>
+                    <div class="form-group {% if signup_form.password2.errors %}errors{% endif %}">
+                        {{ signup_form.password2 }}
+                        <!-- <input type="password" name="pwd-conf" class="form-input" placeholder="confirm your password"> -->
+                    </div>
+                    <div class="form-group">
+                        <div class="control-group">
+                            <label class="control control--checkbox">
+                                <input type="checkbox"/>
+                                <div class="control__indicator"></div>
+                                <span class="subtext">I agree to the terms and conditions</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="submit-btn">CREATE</button>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="login-container">
+
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <h1 class="title login-title">Login</h1>
+                    </div>
+
+                    <!-- <label class="login-label">Username</label><br> -->
+                    <div class="form-group">
+                        <input type="text" id="usr" name="username" class="form-input" placeholder="Username">
+                    </div>
+
+                    <!-- <label class="login-label">Password</label><br> -->
+                    <div class="form-group">
+                        <input type="password" id="pwd" name="password" class="form-input" placeholder="Password">
+                    </div>
+
+                    <div class="form-group">
+                        <button class="submit-btn">LOGIN</button>
+                    </div>
+                    <div class="form-group">
+                        <span class="subtext forgot-text">Forgot your <a href="#">password?</a></span>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+
+        
+    </div>
+
+    <style type="text/css">
+    {% if show_login %}
+        #login-tab {
+            background-color: darkgray;
+            color: white;
+            box-shadow: 1px 1px 5px gray;
+        }
+        #signup-tab {
+            background-color: #e6e6e6;
+            color: #5d5d5d;
+            box-shadow: 1px 1px 1px gray;
+        }
+        .signup-container {
+            display: none;
+        }
+        .login-container {
+            display: block; 
+        }
+    {% endif %}
+    {% if login_errors %} #usr, #pwd { border: 1px solid red; }{% endif %}
+    </style>
+
+    <script type="text/javascript">
+
+        function show_signup() {
+            $(".signup-container").css("display", "block");
+            $(".login-container").css("display", "none");
+
+            $("#login-tab").css("background-color", "#e6e6e6");
+            $("#signup-tab").css("background-color", "darkgray");
+
+            $("#login-tab").css("color", "#5d5d5d");
+            $("#signup-tab").css("color", "white");
+
+            $("#login-tab").css("box-shadow", "1px 1px 1px gray");
+            $("#signup-tab").css("box-shadow", "1px 1px 4px gray");
+
+        }
+
+        function show_login() {
+            $(".login-container").css("display", "block");
+            $(".signup-container").css("display", "none");
+
+            $("#signup-tab").css("background-color", "#e6e6e6");
+            $("#login-tab").css("background-color", "darkgray");
+
+            $("#signup-tab").css("color", "#5d5d5d");
+            $("#login-tab").css("color", "white");
+            
+            $("#signup-tab").css("box-shadow", "1px 1px 1px gray");
+            $("#login-tab").css("box-shadow", "1px 1px 5px gray");
+        }
+        
+    </script>
+
+</body>
+</html>

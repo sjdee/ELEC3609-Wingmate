@@ -1,0 +1,16 @@
+{% extends 'base-welcome.html' %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'myapp/css/stylesheet.css' %}">
+{% endblock %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+
+	<p>Give us a call on 1234-567-890.</p>
+	<p>Go back <a href="/">home</a></p>
+
+{% endblock %}

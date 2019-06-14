@@ -1,0 +1,50 @@
+/*styling for side list of chatroom*/
+
+.chatrooms-list {
+    padding-left: 5%;
+    padding: 5px 5px !important;
+
+
+}
+.chat-list {
+    margin:0px;
+    text-align: left !important;
+}
+.chat-list-item  {
+    display: block !important;
+    font-size: 18px !important;
+    text-align: left !important;
+    border-color:#fff !important;
+    padding: 2px;
+    color: #454545 !important;
+}
+
+
+.chat-list-item:hover  {
+    display: block !important;
+    font-size: 18px !important;
+    text-align: left !important;
+    border-color:#fff !important;
+    padding: 10px;
+    margin: 0px;
+    width:100%;
+    background-color: #d4d4d4;
+    text-decoration: none !important;
+}
+.chat-list-item:hover a{
+    text-decoration: none;
+}
+
+.chat-list-item img  {
+    height:30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+#vertical-line {
+    border-left: 1px solid #cacaca !important;
+}
+
+
+#rooms {
+}

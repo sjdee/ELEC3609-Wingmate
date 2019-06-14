@@ -1,0 +1,33 @@
+{% extends 'base-home.html' %}
+{% load static %}
+{% block content %}
+<html>
+    <head>
+        <title>
+        </title>
+    </head>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <body>
+
+        <div class="container">
+
+        <div style="width:100%; height:100%; text-align:center; vertical-align:center;">
+            <h1>no chatrooms... loser</h1>
+            <h2>head back to wingmap to make new friends<h2>
+                <button>wingmap<button>
+        </div>
+</div>
+</body>
+</html>
+{% endblock %}
+
+<li class="list-group-item">
+    <div class="wingmate-row">
+        <img src="static/images/default.jpg" style="border-radius:50%; margin-right:15px">
+        {{ user }}
+    </div>
+</li>

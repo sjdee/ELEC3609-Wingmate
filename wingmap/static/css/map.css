@@ -1,0 +1,88 @@
+/*CSS file for the main map. Includes stylings for the map
+and other components*/
+
+#map-main {
+    height: 850px;
+	z-index: -1 !important;
+}
+
+.map-container {
+    height:100%;
+    width:100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.list-group {
+    padding-top: 1rem;
+    z-index: 20;
+}
+
+.profile-icon {
+    border-radius: 50%;
+    float:right;
+
+}
+
+.mates-list-container {
+    margin-top: 40px;
+}
+
+.mates-list-item {
+    font-size: 30;
+}
+
+.mates-list-item:hover{
+    background-color: #454545;
+    cursor: pointer;
+}
+
+.overlay-a {
+    position: absolute;
+    z-index: 110;
+}
+
+.overlay-b {
+    position: absolute;
+    z-index: 100;
+}
+
+.map-all{
+    position:relative;
+}
+
+.wingmate-row {
+    display: block;
+    padding: 0 25px;
+    height: 40px;
+    font-size: 16px;
+    line-height: 36px;  /*note its the height + fontsize*/
+    vertical-align: middle;
+}
+
+.wingmate-row img {
+    border-radius: 50%;
+    float:left;
+    margin: 0 10px 0 -25px;
+    height: 40px;
+    width: 40px;
+    vertical-align: middle;
+}
+.list-group-item:hover {
+    background-color: #e2e2e2;
+    cursor: pointer;
+}
+.wingmate-row:hover{
+    background-color: #e2e2e2;
+    cursor: pointer;
+}
+
+.wingmate-row-self {
+    bottom:40px !important;
+    left:40px !important;
+    position:fixed !important;
+}
+
+#map-header {
+    margin:2rem;
+}

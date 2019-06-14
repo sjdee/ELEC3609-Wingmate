@@ -1,0 +1,45 @@
+#message-body {
+    position:relative;
+}
+
+#message-body img {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+}
+
+.left {
+    text-align: left !important;
+    padding: 0px !important;
+    border: 0px none #fff !important;
+}
+
+.right {
+    text-align: right !important;
+    padding: 0px !important;
+    border: 0px none #fff !important
+}
+
+.left img {
+    margin-right: 5px !important;
+}
+
+.right img {
+    margin-left: 5px !important;
+}
+
+.right #message-text {
+    font-weight: 400 !important;
+    color: #fff !important;
+    background: #F04961 !important;
+    padding: 10px 10px;
+    border-radius: 1em;
+}
+
+.left #message-text {
+    font-weight: 400 !important;
+    color: #000 !important;
+    background: #c1c1c1 !important;
+    padding: 10px 10px;
+    border-radius: 1em;
+}

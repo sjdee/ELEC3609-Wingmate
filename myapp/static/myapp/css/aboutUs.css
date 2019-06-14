@@ -1,0 +1,25 @@
+h2{
+	padding-bottom: 20px;
+}
+h3{
+	padding: 10px;
+}
+body{
+	font-family: cabin;
+}
+.my-4 {
+	font-family: cabin;
+	text-align: center;
+}
+#intro{
+	text-align: justify;
+	font-size: 18px;
+	padding-left: 80px;
+	padding-right: 80px;
+}
+#tomIntro{
+	margin-left:15%;
+}
+.row {
+	margin-bottom: 5%;
+}

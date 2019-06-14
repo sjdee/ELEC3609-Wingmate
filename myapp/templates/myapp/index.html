@@ -1,0 +1,130 @@
+{% extends 'base-home.html' %}
+
+{% load static %}
+
+{% block style %}
+<!-- index stylesheet -->
+<link rel="stylesheet" type="text/css" href="{% static 'myapp/css/index.css' %}">
+<!-- Mapbox javascript links -->
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.39.1/mapbox-gl.css' rel='stylesheet'
+/>
+
+<!-- Flapper libs -->
+<link href="{% static 'myapp/css/flapper.css' %}" type="text/css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="{% static 'myapp/js/jquery.flapper.js' %}"></script>
+
+
+<script language="javascript">
+
+    $(document).ready(function() {
+
+    	document.getElementById("current-users").style.opacity = 0;
+
+        var $header_display = $('#header_display');
+        $header_display.flapper({
+            width: 8,
+            chars_preset: 'alpha',
+            threshhold: 50,
+            padding: '&nbsp;',
+            timing: 200,
+            min_timing: 10,
+        });
+
+        setTimeout(function(){
+            $header_display.val('WINGMATE').change();
+        }, 1800);
+
+        setTimeout(function(){
+        	$header_display.val('  216377').change();
+        	$("#current-users").fadeTo(500, 1);
+            $(".flip").animate({"margin-top":"-30px","margin-top":"0px"}, 200);
+        }, 6000);
+
+    });
+
+</script>
+
+
+{% endblock %}
+
+{% block content %}
+
+<!-- <h1>Homepage</h1> -->
+
+
+
+<div id="map-container">
+	<div id='map'></div>
+</div>
+
+<div class="display">
+    <h1 id="current-users">Current Users:</h1>
+    <input class="flip header dark M" id="header_display" />
+</div>
+
+<div class="down-arrow">
+	<span class="glyphicon glyphicon-menu-down" style="font-size: 30px;" aria-hidden="true"></span>
+</div>
+
+<div class="content">
+
+	
+
+	<h1 class="heading">What is it?</h1>
+
+	<p class="intro">We want to connect people, in real life. Social interaction can be difficult and finding a mate to go out with isn’t always easy. WingMate facilitates these interactions between strangers, breaking down the social barriers that schedule people. Society has become connected globally at the expense of the local communities. Online interactions are intangible and inconsequential, but have increasingly become a substitute for face-to-face interaction. This substitution is contributing to this global disconnect from society. The society that is grounded in the real
+	world, that we live and work in.</p>
+
+	<p class="intro">WingMate will reconnect people to others nearby. Find a mate for a night out or just someone to accompany you for your morning coffee. New in town? Meet some locals to show you around. There are so many stories to be shared, so many things to do and so many people to meet. WingMate will just facilitate the process.</p>
+
+</div>
+
+<script> // loads the map into div#map
+mapboxgl.accessToken = 'pk.eyJ1IjoiamRzZXZpbGxhIiwiYSI6ImNqNDN3cHF6bjBsMmMzM216MXdlYm1jZmUifQ.Zrv5yNJrZo485RiMZWcFzg';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/jdsevilla/cj7fzxynl3ajx2sruzn90nu41', // stylesheet location
+    center: [-87.603177, 41.73832], // starting position [lng, lat]
+    zoom: 10.7, // starting zoom
+    pitch: 60, // pitch in degrees
+    bearing: -60, // bearing in degrees
+});
+
+// 3D buildings
+map.on('load', function() {
+    // Insert the layer beneath any symbol layer.
+    var layers = map.getStyle().layers.reverse();
+    var labelLayerIdx = layers.findIndex(function (layer) {
+        return layer.type !== 'symbol';
+    });
+    var labelLayerId = labelLayerIdx !== -1 ? layers[labelLayerIdx].id : undefined;
+    map.addLayer({
+        'id': '3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+            'fill-extrusion-color': '#aaa',
+            'fill-extrusion-height': {
+                'type': 'identity',
+                'property': 'height'
+            },
+            'fill-extrusion-base': {
+                'type': 'identity',
+                'property': 'min_height'
+            },
+            'fill-extrusion-opacity': 0.6
+        }
+    }, labelLayerId);
+});
+
+
+</script>
+
+
+
+{% endblock %}

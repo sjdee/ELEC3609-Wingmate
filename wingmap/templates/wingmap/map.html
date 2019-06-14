@@ -1,0 +1,148 @@
+{% extends 'base-home.html' %}
+{% load leaflet_tags %}
+{% load geojson_tags %}
+{% load static %}
+
+<html>
+<head>
+    {% block head %}
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <script src="{% static 'js/popup.js'%}"></script>
+    <script src="{% static 'js/misc-helper.js'%}"></script>
+    <script src="{% static 'js/map.js'%}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    {% endblock %}
+
+    {% block style%}
+    <script src="https://use.fontawesome.com/8c37ca335b.js"></script>
+    <link rel="stylesheet" href="/static/css/popup.css">
+    <link rel="stylesheet" href="/static/css/map.css">
+    <link rel="stylesheet" href="/static/css/star.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% endblock %}
+
+</head>
+
+
+<body>
+
+    {% block content %}
+
+    <div class="map-all">
+        <div class="user-list overlay">
+
+        </div>
+
+        <div class="mates-list-container overlay-a">
+            <ul class="mates-list">
+                {% for other_user in users %}
+                {% ifnotequal other_user|stringformat:"s" request.user.username %}
+                {% if not other_user.is_staff   %}
+                <li class="list-group-item">
+                    <div class="wingmate-row" value="{{ other_user }}">
+                        <img src="static/images/default.jpg" style="border-radius:50%; margin-right:15px">
+                        {{ other_user }}
+                    </div>
+                </li>
+                {% endif %}
+                {% endifnotequal %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class = "overlay-a">
+            <li class="list-group-item list-group-item-self wingmate-row-self">
+                <div class="wingmate-row" value="{{ request.user.username }}">
+                    <i class="fa fa-compass fa-2x" aria-hidden="true" style="color:#F04961; vertical-align:center; padding:2px;"></i>
+                    You
+                </div>
+            </li>
+        </div>
+        <div>
+            <!-- <h1 id="map-header">map</h1> -->
+            <div class="map-container overlay-b">
+                {% leaflet_map "map-main" callback="main_map_init" %}
+            </div>
+        </div>
+        <script text="text/javascript">
+
+        //function for initialising the map, and all map funcality - called by  .map-container
+        //needs to be initialised here
+        function main_map_init (map, options) {
+            $.map = map; //refrence to the map
+            //styling map using mabbox. Map powered by leaflet
+            L.tileLayer('https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiY2hyaXNrb25kbyIsImEiOiJjajdsM2pkZGswdWUwMzN0NmRucmRqdmNmIn0.nApQIxnBBZb-l0-yKyMapQ', {
+                attribution: '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                style: 'mapbox://styles/mapbox/light-v9' // replace this with your style URL
+            }).addTo(map);
+
+            // L.tileLayer('https://api.mapbox.com/styles/v1/chriskondo/cj9411lmun6y12rppb1wtogxg/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2hyaXNrb25kbyIsImEiOiJjajdsM2pkZGswdWUwMzN0NmRucmRqdmNmIn0.nApQIxnBBZb-l0-yKyMapQ')
+            //     .addTo(map)
+            $(".leaflet-control-zoom").css("visibility", "hidden");
+            // initalise view of map
+            map.setView([0, -0], 11);
+
+            /*add listener for open popups - gets the rating and sets the sats*/
+            map.on('popupopen', function(e){
+                var username = e.popup._source.feature.properties.name
+                var allcont = document.getElementsByClassName('leaflet-popup-content')
+                var cont = allcont[0]; //ensures we get the latest open popup
+                if (allcont.length > 1) {
+                    cont = allcont[1]
+                }
+				var csrftoken = getCookie('csrftoken');
+
+                resetAverageStarRating(cont, username)
+            })
+            map.on('dragend', function(e) {
+                map.closePopup();
+            })
+        }
+
+
+    function updateMarkers(map) {
+        var icon = L.icon({
+            iconUrl: "{% static 'images/iconw.png' %}",
+            shadowUrl : "{% static 'images/iconwshadow.png' %}",
+
+            shadowSize: [40,46],
+            iconSize:   [50, 46], // size of the icon
+            shadowAnchor: [35,0],
+            iconAnchor:   [40, 0], // point of the icon which will correspond to marker's location
+            popupAnchor:  [-10, 0] // point from which the popup should open relative to the iconAnchor
+        });
+
+        //retrieves all the locations from the server
+        $.getJSON("{% url 'wingmanLocation' %}", function (data) {
+            var names;
+            L.geoJson(data, {
+                pointToLayer: function(feature, latlng) {
+                    return L.marker(latlng, {icon:icon});
+                },
+                onEachFeature: onEachFeature,
+            }).addTo(map).on('click', clickZoom);
+        });
+    }
+
+
+
+    $(document).ready(function() {
+        var map;
+        var UPDATE_TIMER = 10000; //time between each getLocation call
+        getLocation(true); //get inital location
+        console.log($(window).height())
+        setContentHeight('#map-main');
+        init_wingmatesMenu()
+
+    });
+
+
+    </script>
+    {% endblock %}
+
+</body>
+
+</html>

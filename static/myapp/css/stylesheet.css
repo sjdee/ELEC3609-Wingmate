@@ -1,0 +1,55 @@
+
+#menubar {
+	height: 80px;
+	width: 100%;
+	background-color: #000;
+	border: 1px solid black;
+}
+
+#menubar h1 {
+	font-family: 'Vollkorn';
+	
+	font-size: 30px;
+	color: #fff;
+	line-height: 40px;
+	text-align: center;
+}
+
+#page {
+	text-align: center;
+	padding: 30px 0px;
+}
+
+.content {
+	display: inline-block;
+	border: 2px solid gray;
+	width: 380px;
+	min-height: 200px;
+	margin-top: 40px;
+	padding: 30px;
+	background-color: white;
+}
+
+.pub-date {
+	font-family: 'Slabo 27px', serif;
+	font-size: 15px;
+	color: #333;
+	margin-top: 10px;
+}
+
+.post-title {
+	color: #15171b;
+	font-size: 40px;
+	font-family: 'Lobster';
+	font-weight: 400;
+	line-height: 50px;
+}
+
+.post-content {
+	font-family: 'Roboto';
+	color: #000;
+	font-size: 16px;
+	line-height: 28px;
+}
+
+

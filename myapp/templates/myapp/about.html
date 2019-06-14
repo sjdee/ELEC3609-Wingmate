@@ -1,0 +1,89 @@
+{% extends 'base-home.html' %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{% static 'myapp/css/stylesheet.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'myapp/css/aboutUs.css' %}">
+
+<!-- Bootstrap CSS -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+
+
+<body>
+	<!-- Page Content -->
+    <div class="container">
+
+      <!-- Introduction Row -->
+      <h2 class="my-4">Our Story</h2>
+      <p id="intro">
+		  We want to connect people, in real life. Social interaction can be difficult and finding a mate to go out with isn’t always easy. Wing Mate facilitates these interactions between strangers, breaking down the social barriers that schedule people. Society has become connected globally at the expense of the local communities. Online interactions are intangible and inconsequential, but have increasingly become a substitute for face-to-face interaction. This substitution is contributing to this global disconnect from society. The society that is grounded in the real world, that we live and work in.
+		  Wing Mate will reconnect people to others nearby. Find a mate for a night out or just someone to accompany you for your morning coffee. New in town? Meet some locals to show you around. There are so many stories to be shared, so many things to do and so many people to meet. Wing Mate will just facilitate the process.
+	  </p>
+
+      <!-- Team Members Row -->
+      <div class="row">
+        <div class="col-lg-12">
+          <h2 class="my-4">Our Team</h2>
+        </div>
+		<div id="topRow">
+        <div class="col-lg-4 col-sm-6 text-center mb-4">
+		  <img src="{% static 'myapp/images/leftWing.png' %}" alt="">
+          <img class="img-circle img-fluid d-block mx-auto" src="{% static 'myapp/images/John.png' %}" alt="John Sevilla">
+		  <img src="{% static 'myapp/images/rightwing.png' %}" alt="">
+		  <h3>John Sevilla
+            <small>Developer</small>
+          </h3>
+        </div>
+        <div class="col-lg-4 col-sm-6 text-center mb-4">
+			<img src="{% static 'myapp/images/leftWing.png' %}" alt="">
+          <img class="img-circle img-fluid d-block mx-auto" src="{% static 'myapp/images/Mahsa.png' %}" alt="Mahsa Bayat">
+		  <img src="{% static 'myapp/images/rightwing.png' %}" alt="">
+		  <h3>Mahsa Bayat
+            <small>Developer</small>
+          </h3>
+        </div>
+        <div class="col-lg-4 col-sm-6 text-center mb-4">
+			<img src="{% static 'myapp/images/leftWing.png' %}" alt="">
+          <img class="img-circle img-fluid d-block mx-auto" src="{% static 'myapp/images/Chris.png' %}" alt="Chris Kondo">
+		  <img src="{% static 'myapp/images/rightwing.png' %}" alt="">
+		  <h3>Chris Kondo
+            <small>Developer</small>
+          </h3>
+        </div>
+	</div>
+		<!-- <div id="bottomRow"> -->
+        <div class="col-lg-4 col-sm-6 text-center mb-4" id="tomIntro">
+			<img src="{% static 'myapp/images/leftWing.png' %}" alt="">
+          <img class="img-circle img-fluid d-block mx-auto" src="{% static 'myapp/images/Tom.png' %}" alt="Tom Ingram">
+		  <img src="{% static 'myapp/images/rightwing.png' %}" alt="">
+		  <h3>Tom Ingram
+            <small>Developer</small>
+          </h3>
+        </div>
+        <div class="col-lg-4 col-sm-6 text-center mb-4" id="jaideepIntro">
+			<img src="{% static 'myapp/images/leftWing.png' %}" alt="">
+          <img class="img-circle img-fluid d-block mx-auto" src="{% static 'myapp/images/Jaideep.png' %}" alt="Jaideep Singh">
+		  <img src="{% static 'myapp/images/rightwing.png' %}" alt="">
+
+		  <h3>Jaideep Singh
+            <small>Developer</small>
+          </h3>
+		  <!--Linkedin-->
+        </div>
+      </div>
+	</div>
+    <!-- </div> -->
+    <!-- /.container -->
+
+</body>
+
+
+{% endblock %}

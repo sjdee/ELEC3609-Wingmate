@@ -1,0 +1,105 @@
+{% extends 'base-home.html' %}
+{% load static %}
+{% load bleach_tags %}
+{% block content %}
+
+<html>
+<head>
+    <title>
+    </title>
+</head>
+
+<link rel="stylesheet" type="text/css" href="{% static 'chatbox/css/chatroom.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'chatbox/css/chatbox.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'chatbox/css/messages.css' %}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="//js.pusher.com/4.0/pusher.min.js"></script>
+<script src="{% static 'chatbox/js/chatbox.js' %}"></script>
+
+
+<body>
+	{% csrf_token %}
+    <div class="container">
+        <div class="panel panel-primary" id="panelPrimary">
+            <div class="panel-heading" id= "panelHeading">
+                <img src="{% static  'chatbox/img/default.jpg'%}" width="60px" height="60px">
+                <p style="margin:0px; color:#6f6f6f">{% if chatroom.userOne == request.user %}
+                    {{ chatroom.userTwo.username }}
+                    {% else %}
+                    {{ chatroom.userTwo.username }}
+                    {% endif %}
+                </p>
+            </div>
+
+        <div class="col-md-3 hidden-sm hidden-xs" id="rooms">
+            <ul class="chatrooms-list borderless ">
+                {% for chat in all_chatrooms %}
+                {% if chat.userOne != request.user %}
+                <a href='/chatbox/{{ chat.id }}'>
+                    <li class="chat-list-item list-group-item chat-list-item">
+                        <img src="{% static '/images/default.jpg' %}" width="60" height="60" style="border-radius:50%; margin-right:15px">
+                        {{ chat.userOne }}
+                    </li>
+                </a>
+                {% endif %}
+                {% if chat.userTwo != request.user %}
+                <a href='/chatbox/{{ chat.id }}'>
+                    <li class="list-group-item chat-list-item">
+                        <img src="{% static '/images/default.jpg' %}" width="60" height="60" style="border-radius:50%; margin-right:15px">
+                        {{ chat.userTwo }}
+                    </li>
+                </a>
+                {% endif %}
+                {% endfor%}
+            </ul>
+        </div>
+
+
+        <div class="col-md-9" id="vertical-line">
+            <div class="">
+                {% if chatroom == None%}
+                    <h1>no chats to display</h1>
+                    <h3> go make some mates</h3>
+                {% endif%}
+                <ul class="chatroom-list" id="chatroom-list">
+                    <!-- holds all list elements -->
+                </ul>
+            </div>
+            <div class="row">
+                <div>
+                        <div class="panel-body">
+                            <!-- ul element holding chat messages -->
+                            <ul class="chat list-group borderless" id="chat">
+                            </ul>
+                        </div>
+
+                        <div class="panel-footer">
+                            <div class="input-group">
+                                <!-- text input for the messages to be typed into -->
+                                <input id="btn-input" class="form-control input-sm" placeholder="Type your message here..." type="text">{% csrf_token %}
+                                <span class="input-group-btn">
+                                    <!--- send button for the chat box -->
+                                    <button class="btn btn-warning btn-sm" id="btn-chat">
+                                        <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+            try {
+                var chatroom_id = {{ chatroom.id }}
+            }
+            catch(err) {
+                var chatroom_id = -1;
+            }
+
+            var user = "{{ request.user.username }}"
+            </script>
+        </div>
+    </body>
+    </html>
+    {% endblock %}

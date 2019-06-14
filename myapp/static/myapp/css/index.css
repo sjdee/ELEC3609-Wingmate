@@ -1,0 +1,64 @@
+@import url(https://fonts.googleapis.com/css?family=Rufina);
+@import url('https://fonts.googleapis.com/css?family=Bitter');
+
+html, body {
+	padding: 0;
+	margin: 0;
+}
+
+#map {
+	position: relative;
+	width:100%-100px;
+	height:400px;
+}
+
+#map-container {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.page { /*overwrite the page class div in base.css, extend to border of window for the map*/
+	background-color: white;
+	width: 100%;
+	margin: 0;
+}
+
+.content {
+	width: 800px;
+	padding: 20px 100px;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+#current-users {
+	font-family: 'Bitter', serif;
+	font-size: 30px;
+}
+
+.heading {
+	font-family: 'Rufina';
+	color: black;
+}
+
+.flip {
+	margin-top: -30px;
+}
+
+.intro {
+	color: #525252;
+	font-family: "Cabin";
+	font-size: 18px;
+}
+
+.down-arrow {
+	width: 100%-30px;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.display {
+	width: 100%;
+	margin: 10px 0;
+	text-align: center;
+}
